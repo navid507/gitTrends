@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.sai.gittrends.Models.Repository;
 import com.sai.gittrends.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,15 +38,6 @@ public class TrendsRecyclerViewAdapater extends RecyclerView.Adapter<TrendsRecyc
         return new ViewHolder(view);
     }
 
-    public void setList(List<Repository> values) {
-//        this.mValues = values;
-        notifyDataSetChanged();
-    }
-
-    public void addList(List<Repository> values) {
-//        this.mValues.addAll(values);
-        notifyDataSetChanged();
-    }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
@@ -53,8 +45,14 @@ public class TrendsRecyclerViewAdapater extends RecyclerView.Adapter<TrendsRecyc
         if (holder.mItem instanceof Repository) {
             final Repository cp = (Repository) holder.mItem;
             holder.scoreTV.setText(String.valueOf(cp.getScore()));
-
             holder.titleTV.setText(cp.getName());
+
+            Picasso.with(context)
+                    .load(cp.getOwner().getAvatarUrl())
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_trending_up)
+                    .into(holder.logoIV);
+
         }
 
         if (position > mValues.size() - 10) {
