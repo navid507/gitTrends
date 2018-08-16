@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">gitTrends</string>
+    <string name="rep_title">Trends Of Android </string>
+    <string name="retry">Retry </string>
+</resources>
